@@ -1,0 +1,27 @@
+Modelo 4: m = 500, funciones de activacion = ELU
+	n_hidden = 5
+	n_neurons = 393
+	lr = 0.00014231
+	optimizador = descenso del gradiente
+	
+Modelo 5: m = 1000, funciones de activacion = ELU con Batch Normalization después de cada capa oculta
+	n_hidden = 5
+	n_neurons = 380
+	lr = 0.00124108
+	optimizador = descenso del gradiente
+	
+Modelo 6: m = 1000, funciones de activacion = ELU con Batch Normalization después de cada capa oculta y un dropout despues de cada capa oculta
+	n_hidden = 5
+	n_neurons = 380
+	lr = 0.00124108
+	optimizador = adam
+	tasa de dropout = 0.3
+	
+Modelo 7: m = 1000, funciones de activacion = SELU con dropout despues de cada capa oculta y sin Batch Normalization
+	n_hidden = 5
+	n_neurons = 380
+	lr = 0.00124108
+	optimizador = adam
+	tasa de dropout = 0.5
+	
+
