@@ -49,7 +49,7 @@ t = np.arange(0, t_stop, dt)
 
 
 """ Cargamos el modelo de red neuronal previamente entrenado"""
-model_ANN = keras.models.load_model("modelo_definitivo3(Alt2).h5")
+model_ANN = keras.models.load_model("modelo1.h5")
 
 
 """ Resolvemos la ecuacion con las condiciones iniciales"""
