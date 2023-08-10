@@ -2,7 +2,7 @@
 
 ## 1. Short description
 
-This project consists in a new method to forecast the trajectory of a dynamical system based in artificial neural networks. 
+This project consists in a new method to forecast the trajectory of a dynamical system based in artificial neural networks. I try to use this method with a toy model: the double pendulum. 
 
 ## 2. Motivation
 
