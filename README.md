@@ -16,15 +16,9 @@ The aim of this project, in a selfish point of view, is to learn more about dyna
 
 ## 3. How can I install and execute it?
 
-## Theoretycal resume 
-
-(esto en texstudio)
-
 ## 4. Description of the code
 
 ## 5. License
-
-
 
 ## 6. Bibliography
 
@@ -32,4 +26,3 @@ The aim of this project, in a selfish point of view, is to learn more about dyna
 - A. Géron: “Hands-on Machine Learning with Scikit-Learn, Keras and TensorFlow“ (2019).
 - P. I. Viñuela, I. M. Galván: “Redes de neuronas artificiales. Un enfoque práctico” (2004).
 - https://matplotlib.org/stable/gallery/animation/double_pendulum.html
-- 
