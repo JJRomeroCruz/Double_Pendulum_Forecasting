@@ -1,0 +1,7 @@
+keras>=
+matplotlib
+pandas
+numpy
+prophet
+pillow
+scipy
