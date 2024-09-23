@@ -1,4 +1,0 @@
-Best params: {'learning_rate': 0.00042388879790128094, 'n_hidden': 5, 'n_neurons': 382}
-Best score: -2.5001556475957236Best params: {'learning_rate': 0.0001423155159000112, 'n_hidden': 5, 'n_neurons': 393}
-Best score: -0.21154127021630606Best params: {'learning_rate': 0.001241083615891194, 'n_hidden': 5, 'n_neurons': 380}
-Best score: -0.540779729684194
