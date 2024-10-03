@@ -17,7 +17,7 @@ import models.RNN as RNN
 
 # generate the dataset
 state = [np.random.rand()*np.pi, np.random.rand()*np.pi, np.random.rand()*np.pi, np.random.rand()*np.pi]
-t_stop = 500.0
+t_stop = 1000.0
 dt = 0.02
 t = np.arange(0, t_stop, dt)
 
@@ -26,7 +26,7 @@ data = p.solver(state)
 
 #p.ani(state)
 
-print('Animacion hecha')
+print('Animation done')
 
 # split the dataframe in training, test and validation datasets
 num_train_samples = int(0.5*len(data))
@@ -38,14 +38,14 @@ scaler = MinMaxScaler(feature_range = (0, 1))
 data_sc = scaler.fit_transform(data)
 
 # sequence the data
-n_steps = 10
+n_steps = 20
 
 x_train, y_train = methods.create_sequences(data_sc[:num_train_samples], n_steps)
 x_val, y_val = methods.create_sequences(data_sc[num_train_samples:num_val_samples + num_train_samples], n_steps)
 x_test, y_test = methods.create_sequences(data_sc[num_val_samples + num_train_samples:], n_steps)
 
 # define the model and train it
-model = RNN.RNNmodel(input_shape = (x_train.shape[0], x_train.shape[1]), units = 200, output_size = 4)
+model = RNN.RNNmodel(input_shape = (x_train.shape[0], x_train.shape[1]), units = 50, output_size = 4)
 model.compile(optimizer = 'adam', loss = 'mse')
 model.summary()
 
@@ -63,4 +63,5 @@ plt.plot(history.history['val_loss'], label = 'validation loss')
 plt.legend()
 
 # save the model
-model.save("RNNmodel.h5")
+model.save("RNNmodel.keras")
+

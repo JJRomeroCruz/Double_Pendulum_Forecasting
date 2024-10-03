@@ -7,13 +7,11 @@ Created on Wed Sep 18 10:31:15 2024
 
 import numpy as np
 import matplotlib.pyplot as plt
-import pandas as pd
 from collections import deque
 import matplotlib.animation as animation
 
 import dataset.pendulum as pendulum
 import utils.methods as methods
-import utils.math_utils as math_utils
 
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential

@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 Created on Wed Jul 20 17:11:12 2022
 
@@ -16,10 +14,16 @@ from collections import deque
 
 
 
-class Pendulum(object):
+class Pendulum(): 
+    """ 
     
-    """ Class for the differential equations of the double Pendulum """
-
+    Class for the double Pendulum system with the following conditions:
+        
+        1. The temporal step is always dt = 0.02
+        2. The lengths, the masses and the gravity are always the same
+        3. The only atribute is the lenght of the temporal vector
+        
+        """
 
     dt = 0.02 # time step
     
@@ -28,6 +32,7 @@ class Pendulum(object):
         
     def derivs(self, state, t):
         """ defines the differential equations """
+        
         G = 9.8  # acceleration due to gravity, in m/s^2
         L1 = 1.0  # length of pendulum 1 in m
         L2 = 1.0  # length of pendulum 2 in m
@@ -59,6 +64,7 @@ class Pendulum(object):
     
     def solver(self, state):
         """ Solves the differential equations """
+        
         dt = 0.02
         t = np.arange(0, self.t_stop, dt)
         y = integrate.odeint(self.derivs, state, t)
@@ -112,14 +118,14 @@ class Pendulum(object):
         ani = animation.FuncAnimation(fig8, animate, len(y2), interval = dt*1000, blit = True)
         ani.save('pendulo.gif')
         
-    def CalculateAngularVelocities(self):
+    def calculate_angular_velocities(self):
         """ Calculates the angular velocity """
         
         data = self.solver()
         return data[:, 1], data[:, 3]
 
-    def CalculateKEnergy(self):
-        """ Calculates the Kinetics Energy """
+    def calculate_kinetic_energy(self):
+        """ Calculates the Kinetic Energy """
         G = 9.8  # acceleration due to gravity, in m/s^2
         l1 = 1.0  # length of pendulum 1 in m
         l2 = 1.0  # length of pendulum 2 in m
@@ -137,7 +143,7 @@ class Pendulum(object):
             ec.append(0.5*m1*(v1*l1)**2 + 0.5*m2*((x1*l1)**2 + (x2*l2)**2 + 2.0*x1*x2*l1*l2*np.cos(x1-x2)))
         return ec
     
-    def CalculatePotEnergy(self):
+    def calculate_pot_energy(self):
         """ Calculates the potential energy """
         G = 9.8  # acceleration due to gravity, in m/s^2
         l1 = 1.0  # length of pendulum 1 in m
@@ -158,7 +164,7 @@ class Pendulum(object):
         
         return v
     
-    def CalculateEnergy(self):
+    def calculate_total_energy(self):
         """ Calculates the total energy """
         v = self.CalculatePotEnergy()
         k = self.CalculateKEnergy()
@@ -168,7 +174,7 @@ class Pendulum(object):
 #    def T_max(self):
         """ Calculates the max period """
 """    
-# Prueba
+# Use case
 state = [0.02, 0.0, 0.0, 0.03]
 t_stop = 20
 p = Pendulum(state, t_stop)

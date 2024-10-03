@@ -30,6 +30,7 @@ def masked_MAPE(v, v_, axis = None):
     return np.mean(percentage, axis).astype(np.float64)
 
 def MAPE(v, v_, axis = None):
+    
     """
     Mean absolute percentage error.
     :param v: np.ndarray or int, ground truth.
@@ -39,7 +40,7 @@ def MAPE(v, v_, axis = None):
     """
     
     mape = (np.abs(v_ - v)/ np.abs(v) + 1e-5).astype(np.float64)
-    mape = np.where(mape > 5, 5, mape)
+    #mape = np.where(mape > 5, 5, mape)
     return np.mean(mape, axis)
 
 def RMSE(v, v_, axis = None):
