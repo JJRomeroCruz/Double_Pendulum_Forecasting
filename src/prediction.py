@@ -18,11 +18,11 @@ import dataset.pendulum as pendulum
 import utils.methods as methods
 from models.RNN import RNNmodel
 
-n_steps = 20
+n_steps = 500
 
 # generate the data
 state = [np.random.rand()*np.pi, np.random.rand()*np.pi, np.random.rand()*np.pi, np.random.rand()*np.pi]
-t_stop = 40.0
+t_stop = 20.0
 
 p = pendulum.Pendulum(t_stop)
 data = p.solver(state)
@@ -106,5 +106,5 @@ def ani(data, state, name):
      ani.save(name)
      
      
-ani(data.values, state, 'pendulo_true.gif')
+#ani(data.values, state, 'pendulo_true.gif')
 ani(new_data, state, 'pendulo_RNN.gif')

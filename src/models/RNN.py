@@ -21,23 +21,26 @@ class RNNmodel(tf.keras.Model):
         self.output_size = output_size
         
         # define the layers of our model
-        self.rnn_layer1 = SimpleRNN(self.units, return_sequences = True, input_shape = self.input_shape)
-        self.dropout_layer1 = Dropout(0.2)
-        self.rnn_layer2 = SimpleRNN(self.units, return_sequences = True, input_shape = self.input_shape)
-        self.dropout_layer2 = Dropout(0.2)
-        self.rnn_layer3 = SimpleRNN(self.units, return_sequences = False, input_shape = self.input_shape)
+        self.rnn_layer1 = LSTM(self.units, activation = 'tanh', recurrent_activation = 'sigmoid', use_bias = True, recurrent_dropout = 0.25, return_sequences = True, input_shape = self.input_shape)
+        #self.rnn_layer1 = SimpleRNN(self.units, recurrent_dropout = 0.25, return_sequences = True, input_shape = self.input_shape)
+        #self.dropout_layer1 = Dropout(0.5)
+        self.rnn_layer2 = LSTM(self.units, activation = 'tanh', recurrent_activation = 'sigmoid', use_bias = True, recurrent_dropout = 0.25, return_sequences = True, input_shape = self.input_shape)
+        #self.rnn_layer2 = SimpleRNN(int(self.units), recurrent_dropout = 0.25, return_sequences = True, input_shape = self.input_shape)
+        #self.dropout_layer2 = Dropout(0.3)
+        self.rnn_layer3 = LSTM(self.units, activation = 'tanh', recurrent_activation = 'sigmoid', use_bias = True, recurrent_dropout = 0.25, return_sequences = False, input_shape = self.input_shape)
+        #self.rnn_layer3 = SimpleRNN(int(self.units), recurrent_dropout = 0.25, return_sequences = False, input_shape = self.input_shape)
         self.dropout_layer3 = Dropout(0.2)
         self.output_layer = Dense(self.output_size)
         
     def call(self, inputs):
         # aply all the layers
-        rnn_output = self.rnn_layer1(inputs)
+        x = self.rnn_layer1(inputs)
         # aply the dropout layer
-        dropout_output = self.dropout_layer1(rnn_output)
+        #x = self.dropout_layer1(rnn_output)
         # rnn layer
-        x = self.rnn_layer2(dropout_output)
+        x = self.rnn_layer2(x)
         # dropout
-        x = self.dropout_layer2(x)
+        #x = self.dropout_layer2(x)
         # rnn layer
         x = self.rnn_layer3(x)
         # dropout layer
