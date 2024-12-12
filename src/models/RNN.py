@@ -21,13 +21,24 @@ class RNNmodel(tf.keras.Model):
         self.output_size = output_size
         
         # define the layers of our model
-        self.rnn_layer1 = LSTM(self.units, activation = 'tanh', recurrent_activation = 'sigmoid', use_bias = True, recurrent_dropout = 0.25, return_sequences = True, input_shape = self.input_shape)
+        #self.rnn_layer1 = LSTM(self.units, activation = 'tanh', recurrent_activation = 'sigmoid', use_bias = True, return_sequences = True, input_shape = self.input_shape)
+        self.rnn_layer1 = LSTM(self.units, activation = 'tanh', recurrent_activation = 'sigmoid', use_bias = True, recurrent_dropout = 0.1, return_sequences = True, input_shape = self.input_shape)
+
         #self.rnn_layer1 = SimpleRNN(self.units, recurrent_dropout = 0.25, return_sequences = True, input_shape = self.input_shape)
         #self.dropout_layer1 = Dropout(0.5)
-        self.rnn_layer2 = LSTM(self.units, activation = 'tanh', recurrent_activation = 'sigmoid', use_bias = True, recurrent_dropout = 0.25, return_sequences = True, input_shape = self.input_shape)
+        
+        #self.rnn_layer2 = LSTM(self.units, activation = 'tanh', recurrent_activation = 'sigmoid', use_bias = True, return_sequences = True, input_shape = self.input_shape)
+        self.rnn_layer2 = LSTM(self.units, activation = 'tanh', recurrent_activation = 'sigmoid', use_bias = True, recurrent_dropout = 0.1, return_sequences = True, input_shape = self.input_shape)
+
         #self.rnn_layer2 = SimpleRNN(int(self.units), recurrent_dropout = 0.25, return_sequences = True, input_shape = self.input_shape)
         #self.dropout_layer2 = Dropout(0.3)
-        self.rnn_layer3 = LSTM(self.units, activation = 'tanh', recurrent_activation = 'sigmoid', use_bias = True, recurrent_dropout = 0.25, return_sequences = False, input_shape = self.input_shape)
+        #self.rnn_layer3 = LSTM(self.units, activation = 'tanh', recurrent_activation = 'sigmoid', use_bias = True, recurrent_dropout = 0.25, return_sequences = False, input_shape = self.input_shape)
+        
+        #self.rnn_layer3 = keras.layers.Bidirectional(LSTM(self.units, activation = 'tanh', recurrent_activation = 'sigmoid', use_bias = True, return_sequences = False, input_shape = self.input_shape), merge_mode = 'concat', weights = None, backward_layer = None, **kwargs) 
+        self.rnn_layer3 = keras.layers.Bidirectional(LSTM(self.units, activation = 'tanh', recurrent_activation = 'sigmoid', use_bias = True, recurrent_dropout = 0.2, return_sequences = True, input_shape = self.input_shape), merge_mode = 'concat', weights = None, backward_layer = None, **kwargs) 
+        
+        self.rnn_layer4 = LSTM(self.units, activation = 'tanh', recurrent_activation = 'sigmoid', use_bias = True, recurrent_dropout = 0.1, return_sequences = False, input_shape = self.input_shape)
+        
         #self.rnn_layer3 = SimpleRNN(int(self.units), recurrent_dropout = 0.25, return_sequences = False, input_shape = self.input_shape)
         self.dropout_layer3 = Dropout(0.2)
         self.output_layer = Dense(self.output_size)
@@ -38,13 +49,19 @@ class RNNmodel(tf.keras.Model):
         # aply the dropout layer
         #x = self.dropout_layer1(rnn_output)
         # rnn layer
+        
         x = self.rnn_layer2(x)
+        
         # dropout
         #x = self.dropout_layer2(x)
         # rnn layer
         x = self.rnn_layer3(x)
+        
+        x = self.rnn_layer4(x)
+        
         # dropout layer
         x = self.dropout_layer3(x)
+        
         # aply the last layer
         output = self.output_layer(x)
         

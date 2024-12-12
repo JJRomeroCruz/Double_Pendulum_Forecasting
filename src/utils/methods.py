@@ -111,3 +111,89 @@ def create_sequences(data, n_steps):
         x.append(data[i:i + n_steps])
         y.append(data[i + n_steps])
     return np.array(x), np.array(y)
+
+def calculate_kinetic_energy(df):
+    """
+    Calculates the kinetic energy of the double pendulum
+    
+    Parameters
+    ----------
+    df : pandas dataframe
+        The dataframe with the evolution of the positions angles and angular velocities
+
+    Returns
+    -------
+    ec : numpy array
+        the array of the kinetic energy over time
+
+    """
+    G = 9.8  # acceleration due to gravity, in m/s^2
+    l1 = 1.0  # length of pendulum 1 in m
+    l2 = 1.0  # length of pendulum 2 in m
+    l = l1 + l2  # maximal length of the combined pendulum
+    m1 = 1.0  # mass of pendulum 1 in kg
+    m2 = 1.0  # mass of pendulum 2 in kg
+    ec = []
+    for dato in df.values:
+        x1 = dato[0]
+        v1 = dato[1]
+        x2 = dato[2]
+        v2 = dato[3]
+          
+        ec.append(0.5*m1*(v1*l1)**2 + 0.5*m2*((v1*l1)**2 + (v2*l2)**2 + 2.0*v1*v2*l1*l2*np.cos(x1-x2)))
+    return ec
+  
+def calculate_pot_energy(df):
+    """
+    Calculates the potential energy of the double pendulum
+
+    Parameters
+    ----------
+    df : Pandas DataFrame
+        The dataframe with the evolution of the positions angles and angular velocities over time.
+
+    Returns
+    -------
+    v : numpy array
+        The potential energy over time.
+
+    """
+    G = 9.8  # acceleration due to gravity, in m/s^2
+    l1 = 1.0  # length of pendulum 1 in m
+    l2 = 1.0  # length of pendulum 2 in m
+    l =l1 + l2  # maximal length of the combined pendulum
+    m1 = 1.0  # mass of pendulum 1 in kg
+    m2 = 1.0  # mass of pendulum 2 in kg
+    v = []
+      
+    for dato in df.values:
+        x1 = dato[0]
+        v1 = dato[1]
+        x2 = dato[2]
+        v2 = dato[3]
+          
+        v.append(-m1*G*l1*np.cos(x1) - m2*G*(l1*np.cos(x1) + l2*np.cos(x2)))
+      
+    return v
+  
+def calculate_total_energy(df):
+    """
+    Calculates the total energy 
+    
+    Parameters
+    ----------
+    df : pandas dataframe
+        the angular positions and velocities over time
+
+    Returns the total energy
+    -------
+    list
+        DESCRIPTION.
+
+    """
+    v = calculate_pot_energy(df)
+    k = calculate_kinetic_energy(df)
+      
+    return [v[i] + k[i] for i in range(len(v))]
+
+    

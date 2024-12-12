@@ -140,7 +140,7 @@ class Pendulum():
             x2 = dato[2]
             v2 = dato[3]
             
-            ec.append(0.5*m1*(v1*l1)**2 + 0.5*m2*((x1*l1)**2 + (x2*l2)**2 + 2.0*x1*x2*l1*l2*np.cos(x1-x2)))
+            ec.append(0.5*m1*(v1*l1)**2 + 0.5*m2*((v1*l1)**2 + (v2*l2)**2 + 2.0*v1*v2*l1*l2*np.cos(x1-x2)))
         return ec
     
     def calculate_pot_energy(self):
@@ -160,7 +160,7 @@ class Pendulum():
             x2 = dato[2]
             v2 = dato[3]
             
-            v.append(-m1*G*l1*np.cos(x1) - m2*G*(l1*np.cos(x1) - l2*np.cos(x2)))
+            v.append(-m1*G*l1*np.cos(x1) - m2*G*(l1*np.cos(x1) + l2*np.cos(x2)))
         
         return v
     
@@ -173,10 +173,10 @@ class Pendulum():
     
 #    def T_max(self):
         """ Calculates the max period """
-"""    
+   
 # Use case
-state = [0.02, 0.0, 0.0, 0.03]
-t_stop = 20
-p = Pendulum(state, t_stop)
-p.ani()
-"""
+if __name__ == "__main__":
+    state = [0.02, 0.0, 0.0, 0.03]
+    t_stop = 20
+    p = Pendulum(state, t_stop)
+    p.ani()
